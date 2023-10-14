@@ -7,7 +7,7 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "test": "echo ''"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
