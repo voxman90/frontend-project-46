@@ -21,6 +21,8 @@ jobs:
         node-version: [20.x]
 
     steps:
+      - name: checkout repo
+        uses: actions/checkout@main
       - run: make install
       - run: make lint
       - run: make test
