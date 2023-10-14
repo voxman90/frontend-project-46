@@ -1,10 +1,12 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import fs from 'fs';
-import process from 'node:process';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const supportedFileTypes = ['json'];
 
-const resolveFilePath = (filepath) => path.resolve(process.cwd(), filepath);
+const resolveFilePath = (filepath) => path.resolve(__dirname, filepath);
 
 const getFileData = (resolvedFilePath) => fs.readFileSync(resolvedFilePath, 'utf8');
 
