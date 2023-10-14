@@ -12,3 +12,6 @@ test:
 
 publish:
 		npm publish --dry-run && sudo npm link
+
+test-coverage:
+		npm test -- --coverage --coverageProvider=v8
