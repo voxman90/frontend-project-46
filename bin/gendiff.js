@@ -2,7 +2,7 @@
 
 import { Command } from 'commander';
 
-import { parse } from '../src/index.js';
+import getFileDiff from '../src/index.js';
 
 const program = new Command();
 
@@ -12,6 +12,6 @@ program
   .option('-f, --format <type>', 'output format')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .action((filepath1, filepath2) => [parse(filepath1), parse(filepath2)]);
+  .action((filepath1, filepath2) => console.log(getFileDiff(filepath1, filepath2)));
 
 program.parse();
