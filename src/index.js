@@ -1,24 +1,38 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const supportedFileTypes = ['json'];
+const supportedFileTypes = ['json', 'yaml', 'yml'];
 
 const resolveFilePath = (filepath) => path.resolve(__dirname, filepath);
 
 const getFileData = (resolvedFilePath) => fs.readFileSync(resolvedFilePath, 'utf8');
 
+const getParser = (fileType) => {
+  switch (true) {
+    case (fileType === 'yml'):
+    case (fileType === 'yaml'):
+      return yaml.load;
+    case (fileType === 'json'):
+      return JSON.parse;
+    default:
+      throw new Error(`Unsupported file type: ${fileType}`);
+  }
+};
+
 const parseFile = (filepath) => {
   const resolvedFilePath = resolveFilePath(filepath);
-  const fileType = path.extname(resolvedFilePath);
+  const fileType = path.extname(resolvedFilePath).substring(1);
 
-  if (!supportedFileTypes.includes(fileType.substring(1))) {
-    throw new Error('Unsupported file type -- PARSE');
+  if (!supportedFileTypes.includes(fileType)) {
+    throw new Error(`Unsupported file type: ${fileType}`);
   }
 
-  return JSON.parse(getFileData(resolvedFilePath) || {});
+  return getParser(fileType)
+    .call(null, getFileData(resolvedFilePath));
 };
 
 const getUniqueKeys = (obj1, obj2) => Object.keys(obj1)
@@ -57,8 +71,8 @@ const getDataDiff = (data1, data2) => {
 };
 
 const getFileDiff = (filepath1, filepath2) => getDataDiff(
-  parseFile(filepath1),
-  parseFile(filepath2),
+  parseFile(filepath1) || {},
+  parseFile(filepath2) || {},
 );
 
 export default getFileDiff;

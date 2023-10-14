@@ -50,7 +50,7 @@ describe('Test getFileDiff for different address types', () => {
 
   test('wrong file type tests', () => {
     expect(() => getFileDiff(absolutePathA, wrongTypePath))
-      .toThrow('Unsupported file type -- PARSE');
+      .toThrow('Unsupported file type: html');
   });
 
   test('wrong address tests', () => {
