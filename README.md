@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/voxman90/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/voxman90/frontend-project-46/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4323dafe0d47b940e765/maintainability)](https://codeclimate.com/github/voxman90/frontend-project-46/maintainability)
-
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4323dafe0d47b940e765/test_coverage)](https://codeclimate.com/github/voxman90/frontend-project-46/test_coverage)
 # Instruction
 
 [![asciicast](https://asciinema.org/a/7SjxF2pvHjUWkWtPe6Ls3eZDU.svg)](https://asciinema.org/a/7SjxF2pvHjUWkWtPe6Ls3eZDU)
