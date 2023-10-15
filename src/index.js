@@ -3,24 +3,20 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 const supportedFileTypes = ['json', 'yaml', 'yml'];
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const resolveFilePath = (filepath) => path.resolve(__dirname, filepath);
 
 const getFileData = (resolvedFilePath) => fs.readFileSync(resolvedFilePath, 'utf8');
 
-const getParser = (fileType) => {
-  switch (true) {
-    case (fileType === 'yml'):
-    case (fileType === 'yaml'):
-      return yaml.load;
-    case (fileType === 'json'):
-      return JSON.parse;
-    default:
-      throw new Error(`Unsupported file type: ${fileType}`);
+const getFileDataParser = (fileType) => {
+  if ((fileType === 'yml') || (fileType === 'yaml')) {
+    return yaml.load;
   }
+
+  return JSON.parse;
 };
 
 const parseFile = (filepath) => {
@@ -31,7 +27,7 @@ const parseFile = (filepath) => {
     throw new Error(`Unsupported file type: ${fileType}`);
   }
 
-  return getParser(fileType)
+  return getFileDataParser(fileType)
     .call(null, getFileData(resolvedFilePath));
 };
 
