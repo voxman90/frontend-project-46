@@ -53,4 +53,14 @@ describe('Test getFileDiff for different file types', () => {
   test('test for JSON and YAML', () => {
     expect(getFileDiff(pathToJSONA, pathToYmlB)).toBe(stylishABDiff);
   });
+
+  const pathToYamlNestedA = '../__fixtures__/nestedA.yml';
+  const pathToYamlNestedB = '../__fixtures__/nestedB.yaml';
+  const pathToJSONNestedA = '../__fixtures__/nestedA.json';
+  const pathToJSONNestedB = '../__fixtures__/nestedB.json';
+
+  test('test for nested JSON and YAML', () => {
+    expect(getFileDiff(pathToYamlNestedA, pathToJSONNestedB))
+      .toBe(getFileDiff(pathToJSONNestedA, pathToYamlNestedB));
+  });
 });
