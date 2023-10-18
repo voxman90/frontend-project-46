@@ -3,8 +3,8 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { fileURLToPath } from 'url';
 
-import stylishDiff from './stylish';
-import getDataDiff from './parsers';
+import stylishDiff from './stylish.js';
+import getDataDiff from './parsers.js';
 
 const supportedFileTypes = ['json', 'yaml', 'yml'];
 
@@ -34,7 +34,7 @@ const parseFile = (filepath) => {
     .call(null, getFileData(resolvedFilePath));
 };
 
-const getFileDiff = (filepath1, filepath2) => stylishDiff(getDataDiff(
+const getFileDiff = (filepath1, filepath2, formater) => formater(getDataDiff(
   parseFile(filepath1) || {},
   parseFile(filepath2) || {},
 ));

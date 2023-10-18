@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 
-import { isObjectAndNotArray } from './utils';
+import { isObjectAndNotArray } from './utils.js';
 
 const isWeighted = Symbol('weighted');
 

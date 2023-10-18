@@ -6,14 +6,14 @@ import {
   getPropWeight,
   isDiffObj,
   mapWeightedProperties,
-} from './parsers';
+} from './parsers.js';
 
 import {
   makeList,
   appendList,
   reduceList,
   isObjectAndNotArray,
-} from './utils';
+} from './utils.js';
 
 const halfIndent = ' '.repeat(2);
 const indent = halfIndent.repeat(2);
