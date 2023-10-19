@@ -16,3 +16,9 @@
 [![asciicast](https://asciinema.org/a/lRSGdf9udWVxIO5Cxp2SFnczI.svg)](https://asciinema.org/a/lRSGdf9udWVxIO5Cxp2SFnczI)
 
 The programme accepts as input two absolute or relative addresses to a file, as well as an option of selecting a formatter. Supported file formats: yaml, json. Formatter (default): stylish. The result of this formatter can be viewed on asciinema.
+
+# Other formatters
+
+[![asciicast](https://asciinema.org/a/OYav4ezm181tCL653vtS0jrkL.svg)](https://asciinema.org/a/OYav4ezm181tCL653vtS0jrkL)
+
+The programme also allows you to output the difference in a plain format. To do this, use the ``--format`` option with the value ``plain``.
