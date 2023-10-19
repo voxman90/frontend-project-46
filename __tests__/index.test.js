@@ -24,20 +24,20 @@ describe('Test getFileDiff for different address types', () => {
   const wrongPath = '../__fixtures__/fileC.json';
 
   test('absolute address tests', () => {
-    expect(getFileDiff(absolutePathA, absolutePathB)).toBe(stylishABDiff);
+    expect(getFileDiff(absolutePathA, absolutePathB, 'stylish')).toBe(stylishABDiff);
   });
 
   test('relative address tests', () => {
-    expect(getFileDiff(relativePathA, relativePathB)).toBe(stylishABDiff);
+    expect(getFileDiff(relativePathA, relativePathB, 'stylish')).toBe(stylishABDiff);
   });
 
   test('wrong file type tests', () => {
-    expect(() => getFileDiff(absolutePathA, wrongTypePath))
+    expect(() => getFileDiff(absolutePathA, wrongTypePath, 'stylish'))
       .toThrow('Unsupported file type: html');
   });
 
   test('wrong address tests', () => {
-    expect(() => getFileDiff(absolutePathA, wrongPath)).toThrow();
+    expect(() => getFileDiff(absolutePathA, wrongPath, 'stylish')).toThrow();
   });
 });
 
@@ -47,11 +47,11 @@ describe('Test getFileDiff for different file types', () => {
   const pathToYmlB = '../__fixtures__/fileB.yml';
 
   test('test for YAML', () => {
-    expect(getFileDiff(pathToYamlA, pathToYmlB)).toBe(stylishABDiff);
+    expect(getFileDiff(pathToYamlA, pathToYmlB, 'stylish')).toBe(stylishABDiff);
   });
 
   test('test for JSON and YAML', () => {
-    expect(getFileDiff(pathToJSONA, pathToYmlB)).toBe(stylishABDiff);
+    expect(getFileDiff(pathToJSONA, pathToYmlB, 'stylish')).toBe(stylishABDiff);
   });
 
   const pathToYamlNestedA = '../__fixtures__/nestedA.yml';
@@ -60,7 +60,7 @@ describe('Test getFileDiff for different file types', () => {
   const pathToJSONNestedB = '../__fixtures__/nestedB.json';
 
   test('test for nested JSON and YAML', () => {
-    expect(getFileDiff(pathToYamlNestedA, pathToJSONNestedB))
-      .toBe(getFileDiff(pathToJSONNestedA, pathToYamlNestedB));
+    expect(getFileDiff(pathToYamlNestedA, pathToJSONNestedB, 'stylish'))
+      .toBe(getFileDiff(pathToJSONNestedA, pathToYamlNestedB, 'stylish'));
   });
 });

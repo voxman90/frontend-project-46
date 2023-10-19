@@ -3,8 +3,8 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { fileURLToPath } from 'url';
 
-import stylishDiff from './stylish.js';
-import getDataDiff from './parsers.js';
+import getDiff from './parsers.js';
+import getFormatter from '../formatters/index.js';
 
 const supportedFileTypes = ['json', 'yaml', 'yml'];
 
@@ -30,13 +30,11 @@ const parseFile = (filepath) => {
     throw new Error(`Unsupported file type: ${fileType}`);
   }
 
-  return getFileDataParser(fileType)
-    .call(null, getFileData(resolvedFilePath));
+  return getFileDataParser(fileType)(getFileData(resolvedFilePath)) || {};
 };
 
-const getFileDiff = (filepath1, filepath2, formater) => formater(getDataDiff(
-  parseFile(filepath1) || {},
-  parseFile(filepath2) || {},
-));
+const getFileDiff = (filepath1, filepath2, formatName) => getFormatter(formatName)(
+  getDiff(parseFile(filepath1), parseFile(filepath2)),
+);
 
 export default getFileDiff;

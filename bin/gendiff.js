@@ -3,7 +3,6 @@
 import { Command } from 'commander';
 
 import getFileDiff from '../src/index.js';
-import stylishDiff from '../src/stylish.js';
 
 const program = new Command();
 
@@ -13,12 +12,8 @@ program
   .option('-f, --format <type>', 'output format', 'stylish')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .action((filepath1, filepath2) => {
-    if (program.opts().format === 'stylish') {
-      return console.log(getFileDiff(filepath1, filepath2, stylishDiff));
-    }
-
-    return console.log('Unknown formatter');
-  });
+  .action((filepath1, filepath2) => console.log(
+    getFileDiff(filepath1, filepath2, program.opts().format),
+  ));
 
 program.parse();
