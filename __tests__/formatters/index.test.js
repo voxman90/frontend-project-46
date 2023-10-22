@@ -1,9 +1,9 @@
 import { expect, describe, test } from '@jest/globals';
 
-import getFormatter from '../../formatters/index.js';
-import jsonFormatter from '../../formatters/json.js';
-import stylishFormatter from '../../formatters/stylish.js';
-import plainFormatter from '../../formatters/plain.js';
+import getFormatter from '../../src/formatters/index.js';
+import jsonFormatter from '../../src/formatters/json.js';
+import stylishFormatter from '../../src/formatters/stylish.js';
+import plainFormatter from '../../src/formatters/plain.js';
 
 describe('Test getFormatter', () => {
   test('test format plain', () => {

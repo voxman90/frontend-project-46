@@ -6,14 +6,14 @@ import {
   plainEmptyDiff,
   plainNestedDiff,
 } from '../../__fixtures__/samples.js';
-import formatDiff from '../../formatters/plain.js';
+import formatDiff from '../../src/formatters/plain.js';
 
 describe('Test stylishDiff', () => {
-  test('test empty diff', () => {
+  test('test empty diffTree', () => {
     expect(formatDiff(EEDiff)).toEqual(plainEmptyDiff);
   });
 
-  test('test nested diff', () => {
+  test('test nested diffTree', () => {
     expect(formatDiff(diffNested)).toEqual(plainNestedDiff);
   });
 });

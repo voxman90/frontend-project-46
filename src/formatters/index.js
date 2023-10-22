@@ -14,7 +14,7 @@ const getFormatter = (formatName) => {
       return formatDiffToJSON;
     }
     default: {
-      throw new Error('Unknown format type');
+      throw new Error('Unknown format type', formatName);
     }
   }
 };
