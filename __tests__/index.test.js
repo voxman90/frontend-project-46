@@ -24,12 +24,14 @@ describe('Test getFileDiff for different address types', () => {
   });
 
   test('wrong file type tests', () => {
-    expect(() => getFileDiff(absolutePathA, wrongTypePath, 'stylish'))
-      .toThrow('Unsupported file type: html');
+    expect(getFileDiff(absolutePathA, wrongTypePath, 'stylish'))
+      .toEqual('Unsupported file type: html');
   });
 
   test('wrong address tests', () => {
-    expect(() => getFileDiff(absolutePathA, wrongPath, 'stylish')).toThrow();
+    expect(getFileDiff(absolutePathA, wrongPath, 'stylish')).toEqual(
+      "ENOENT: no such file or directory, open '/home/vox90/practice/frontend-project-46/__fixtures__/nestedC.json'",
+    );
   });
 });
 

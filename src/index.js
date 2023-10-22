@@ -16,11 +16,17 @@ const getRawData = (filepath) => {
   return rawData;
 };
 
-const getFileDiff = (filepath1, filepath2, formatName) => getFormatter(formatName)(
-  getDiffTree(
-    getParser(getFileExtension(filepath1))(getRawData(filepath1)) || {},
-    getParser(getFileExtension(filepath2))(getRawData(filepath2)) || {},
-  ),
-);
+const getFileDiff = (filepath1, filepath2, formatName) => {
+  try {
+    return getFormatter(formatName)(
+      getDiffTree(
+        getParser(getFileExtension(filepath1))(getRawData(filepath1)) || {},
+        getParser(getFileExtension(filepath2))(getRawData(filepath2)) || {},
+      ),
+    );
+  } catch (error) {
+    return error.message;
+  }
+};
 
 export default getFileDiff;
