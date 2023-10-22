@@ -2,7 +2,51 @@
 [![Actions Status](https://github.com/voxman90/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/voxman90/frontend-project-46/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4323dafe0d47b940e765/maintainability)](https://codeclimate.com/github/voxman90/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4323dafe0d47b940e765/test_coverage)](https://codeclimate.com/github/voxman90/frontend-project-46/test_coverage)
-# Instruction
+
+# Gendiff
+Gendiff is a console utility that compares two configuration files and shows a difference.
+
+### Supported file formats:
+
+  * yaml
+  * json
+
+### Output formats:
+
+  * stylish (default)
+  * plain
+  * json
+
+## Usage
+
+```shell
+$ gendiff -h
+
+Usage: gendiff [options] <filepath1> <filepath2>
+
+Options:
+  -V, --version        output the version number
+  -f, --format <type>  output format (default: "stylish")
+  -h, --help           display help for command
+```
+
+## Requirements
+
+Node 20.x
+
+## Installation
+
+Clone the repository:
+
+```shell
+$ git clone git@github.com:voxman90/frontend-project-46.git
+```
+
+Run the Makefile commands: ``make install``, ``make publish`` and after that ``npm link @hexlet/code``
+
+Now you can install the utility via ``npm link @hexlet/code`` link to the desired directory.
+
+## Asciinema instructions
 
 [![asciicast](https://asciinema.org/a/7SjxF2pvHjUWkWtPe6Ls3eZDU.svg)](https://asciinema.org/a/7SjxF2pvHjUWkWtPe6Ls3eZDU)
 
@@ -11,13 +55,13 @@
 -  00:10 - The help can be displayed by entering the command ``gendiff -h``
 -  00:20 - The programme displays the difference between two JSON files in text format. The programme takes as input two relative or absolute paths to the files whose data is to be compared. Own properties that have different values or do not exist in another object are marked **-** for the first object and **+** for the second object, in other cases it displays the key and value pair.
 
-# Parameters
+## Parameters
 
 [![asciicast](https://asciinema.org/a/lRSGdf9udWVxIO5Cxp2SFnczI.svg)](https://asciinema.org/a/lRSGdf9udWVxIO5Cxp2SFnczI)
 
 The programme accepts as input two absolute or relative addresses to a file, as well as an option of selecting a formatter. Supported file formats: yaml, json. Formatter (default): stylish. The result of this formatter can be viewed on asciinema.
 
-# Other formatters: plain
+## Other formatters: plain
 
 [![asciicast](https://asciinema.org/a/OYav4ezm181tCL653vtS0jrkL.svg)](https://asciinema.org/a/OYav4ezm181tCL653vtS0jrkL)
 
