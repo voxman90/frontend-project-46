@@ -9,11 +9,11 @@ import {
 import formatDiff from '../../src/formatters/json.js';
 
 describe('Test stylishDiff', () => {
-  test('test empty diffTree', () => {
+  test('empty diffTree', () => {
     expect(formatDiff(EEDiff)).toEqual(jsonEmptyDiff);
   });
 
-  test('test nested diffTree', () => {
+  test('nested diffTree', () => {
     expect(formatDiff(diffNested)).toEqual(jsonNestedDiff);
   });
 });

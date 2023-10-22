@@ -6,19 +6,19 @@ import stylishFormatter from '../../src/formatters/stylish.js';
 import plainFormatter from '../../src/formatters/plain.js';
 
 describe('Test getFormatter', () => {
-  test('test format plain', () => {
+  test('plain format', () => {
     expect(getFormatter('plain')).toEqual(plainFormatter);
   });
 
-  test('test format stylish', () => {
+  test('stylish format', () => {
     expect(getFormatter('stylish')).toEqual(stylishFormatter);
   });
 
-  test('test format json', () => {
+  test('json format', () => {
     expect(getFormatter('json')).toEqual(jsonFormatter);
   });
 
-  test('test incorrect format', () => {
-    expect(() => { getFormatter(null); }).toThrowError();
+  test('incorrect format', () => {
+    expect(() => { getFormatter(null); }).toThrow();
   });
 });

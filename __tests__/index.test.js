@@ -15,20 +15,20 @@ describe('Test getFileDiff for different address types', () => {
   const wrongTypePath = '../__fixtures__/nestedA.html';
   const wrongPath = '../__fixtures__/nestedC.json';
 
-  test('absolute address tests', () => {
+  test('absolute address', () => {
     expect(getFileDiff(absolutePathA, absolutePathB, 'stylish')).toBe(stylishNestedDiff);
   });
 
-  test('relative address tests', () => {
+  test('relative address', () => {
     expect(getFileDiff(relativePathA, relativePathB, 'stylish')).toBe(stylishNestedDiff);
   });
 
-  test('wrong file type tests', () => {
+  test('wrong file type', () => {
     expect(getFileDiff(absolutePathA, wrongTypePath, 'stylish'))
       .toEqual('Unsupported file type: html');
   });
 
-  test('wrong address tests', () => {
+  test('wrong address', () => {
     expect(getFileDiff(absolutePathA, wrongPath, 'stylish')).toEqual(
       `ENOENT: no such file or directory, open '${resolve(__dirname, '../__fixtures__/nestedC.json')}'`,
     );

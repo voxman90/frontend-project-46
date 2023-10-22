@@ -2,7 +2,7 @@ import { expect, test } from '@jest/globals';
 
 import { isObjectAndNotArray } from '../src/utils.js';
 
-test('Test isObjectAndNotArray', () => {
+test('isObjectAndNotArray', () => {
   expect(isObjectAndNotArray({})).toBeTruthy();
   expect(isObjectAndNotArray({ prop1: 'val1', prop2: { prop3: 2 } })).toBeTruthy();
 
