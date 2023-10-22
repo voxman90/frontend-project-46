@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
 
+import _ from 'lodash';
+
 import { nodeWeight, makeLeaf } from '../diff-tree.js';
 import { isObjectAndNotArray } from '../utils.js';
 
@@ -61,8 +63,7 @@ const formatObject = (depth, obj, isThisNodes = false) => {
     ? splitUpdatedNodes(obj)
       .map((node) => formatNode(depth, node))
       .join('\n')
-    : [...Object.keys(obj)]
-      .sort()
+    : _.sortBy(Object.keys(obj))
       .map((key) => formatNode(depth, makeLeaf(null, key, obj[key])))
       .join('\n');
   const parenthesisIndent = indent.repeat(depth);
