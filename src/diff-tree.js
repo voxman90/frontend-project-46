@@ -14,7 +14,7 @@ const nodeWeight = {
 
 const getUniqueOwnKeys = (obj1, obj2) => Object.keys(obj1)
   .concat(Object.keys(obj2))
-  .sort()
+  .toSorted()
   .filter((item, index, arr) => arr.indexOf(item) === index);
 
 const getPropDiff = (key, obj1, obj2) => {

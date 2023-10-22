@@ -62,7 +62,7 @@ const formatObject = (depth, obj, isThisNodes = false) => {
       .map((node) => formatNode(depth, node))
       .join('\n')
     : Object.keys(obj)
-      .sort()
+      .toSorted()
       .map((key) => formatNode(depth, makeLeaf(null, key, obj[key])))
       .join('\n');
   const parenthesisIndent = indent.repeat(depth);
