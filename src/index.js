@@ -16,7 +16,7 @@ const getRawData = (filepath) => {
   return rawData;
 };
 
-const getFileDiff = (filepath1, filepath2, formatName) => {
+const getFileDiff = (filepath1, filepath2, formatName = 'stylish') => {
   try {
     return getFormatter(formatName)(
       getDiffTree(
