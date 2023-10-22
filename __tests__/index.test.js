@@ -30,7 +30,7 @@ describe('Test getFileDiff for different address types', () => {
 
   test('wrong address tests', () => {
     expect(getFileDiff(absolutePathA, wrongPath, 'stylish')).toEqual(
-      "ENOENT: no such file or directory, open '/home/vox90/practice/frontend-project-46/__fixtures__/nestedC.json'",
+      `ENOENT: no such file or directory, open '${resolve(__dirname, '../__fixtures__/nestedC.json')}'`,
     );
   });
 });
