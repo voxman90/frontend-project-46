@@ -1,20 +1,18 @@
-/* eslint-disable no-use-before-define */
-
 import yaml from 'js-yaml';
 
-const getParser = (fileExtension) => {
+const parseRawData = (fileExtension, rawData) => {
   switch (fileExtension) {
     case 'yaml':
     case 'yml': {
-      return yaml.load;
+      return yaml.load(rawData);
     }
     case 'json': {
-      return JSON.parse;
+      return JSON.parse(rawData);
     }
     default: {
-      throw new Error(`Unsupported file type: ${fileExtension}`);
+      throw new Error(`Unsupported type: ${fileExtension}`);
     }
   }
 };
 
-export default getParser;
+export default parseRawData;

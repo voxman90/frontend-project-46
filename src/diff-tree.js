@@ -2,8 +2,6 @@
 
 import _ from 'lodash';
 
-import { isObjectAndNotArray } from './utils.js';
-
 const nodeWeight = {
   removed: -1,
   unchanged: 0,
@@ -16,11 +14,11 @@ const getUniqueOwnKeys = (obj1, obj2) => _.sortBy(Object.keys(obj1).concat(Objec
   .filter((item, index, arr) => arr.indexOf(item) === index);
 
 const getPropDiff = (key, obj1, obj2) => {
-  if (!Object.hasOwn(obj2, key)) {
+  if (!_.has(obj2, key)) {
     return makeLeaf(nodeWeight.removed, key, obj1[key]);
   }
 
-  if (!Object.hasOwn(obj1, key)) {
+  if (!_.has(obj1, key)) {
     return makeLeaf(nodeWeight.added, key, obj2[key]);
   }
 
@@ -31,8 +29,8 @@ const getPropDiff = (key, obj1, obj2) => {
   }
 
   if (
-    isObjectAndNotArray(propValue1)
-    && isObjectAndNotArray(propValue2)
+    _.isPlainObject(propValue1)
+    && _.isPlainObject(propValue2)
   ) {
     return makeDiffTree(key, propValue1, propValue2);
   }

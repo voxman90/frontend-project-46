@@ -3,7 +3,6 @@
 import _ from 'lodash';
 
 import { nodeWeight, makeLeaf } from '../diff-tree.js';
-import { isObjectAndNotArray } from '../utils.js';
 
 const thisIsNodeList = true;
 
@@ -29,7 +28,7 @@ const formatNodeValue = (depth, node) => {
     return formatObject(depth + 1, value, thisIsNodeList);
   }
 
-  if (isObjectAndNotArray(value)) {
+  if (_.isPlainObject(value)) {
     return formatObject(depth + 1, value);
   }
 

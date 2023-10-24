@@ -1,60 +1,26 @@
-import { resolve, dirname } from 'path';
+import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { expect, describe, test } from '@jest/globals';
 
 import getFileDiff from '../src/index.js';
-import { stylishNestedDiff } from '../__fixtures__/samples.js';
+import { jsonNestedDiff, plainNestedDiff, stylishNestedDiff } from '../__fixtures__/samples.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const fileDir = resolve(__dirname, '../__fixtures__/');
 
-describe('Test getFileDiff for different address types', () => {
-  const relativePathA = '../__fixtures__/nestedA.json';
-  const relativePathB = '../__fixtures__/nestedB.json';
-  const absolutePathA = resolve(__dirname, relativePathA);
-  const absolutePathB = resolve(__dirname, relativePathB);
-  const wrongTypePath = '../__fixtures__/nestedA.html';
-  const wrongPath = '../__fixtures__/nestedC.json';
+describe.each([
+  ['json'],
+  ['yaml'],
+  ['yml'],
+])('Test getFileDiff for \'%s\' type file', (fileExt) => {
+  const fileAPath = join(fileDir, `nestedA.${fileExt}`);
+  const fileBPath = join(fileDir, `nestedB.${fileExt}`);
 
-  test('absolute address', () => {
-    expect(getFileDiff(absolutePathA, absolutePathB, 'stylish')).toBe(stylishNestedDiff);
-  });
-
-  test('relative address', () => {
-    expect(getFileDiff(relativePathA, relativePathB, 'stylish')).toBe(stylishNestedDiff);
-  });
-
-  test('wrong file type', () => {
-    expect(getFileDiff(absolutePathA, wrongTypePath, 'stylish'))
-      .toEqual('Unsupported file type: html');
-  });
-
-  test('wrong address', () => {
-    expect(getFileDiff(absolutePathA, wrongPath, 'stylish')).toEqual(
-      `ENOENT: no such file or directory, open '${resolve(__dirname, '../__fixtures__/nestedC.json')}'`,
-    );
-  });
-});
-
-describe('Test getFileDiff for different file types', () => {
-  const pathToYamlA = '../__fixtures__/nestedA.yml';
-  const pathToJSONA = '../__fixtures__/nestedA.json';
-  const pathToYmlB = '../__fixtures__/nestedB.yaml';
-
-  test('for YAML', () => {
-    expect(getFileDiff(pathToYamlA, pathToYmlB, 'stylish')).toBe(stylishNestedDiff);
-  });
-
-  test('for JSON and YAML', () => {
-    expect(getFileDiff(pathToJSONA, pathToYmlB, 'stylish')).toBe(stylishNestedDiff);
-  });
-
-  const pathToYamlNestedA = '../__fixtures__/nestedA.yml';
-  const pathToYamlNestedB = '../__fixtures__/nestedB.yaml';
-  const pathToJSONNestedA = '../__fixtures__/nestedA.json';
-  const pathToJSONNestedB = '../__fixtures__/nestedB.json';
-
-  test('for nested JSON and YAML', () => {
-    expect(getFileDiff(pathToYamlNestedA, pathToJSONNestedB, 'stylish'))
-      .toBe(getFileDiff(pathToJSONNestedA, pathToYamlNestedB, 'stylish'));
+  test.each([
+    ['stylish', stylishNestedDiff],
+    ['plain', plainNestedDiff],
+    ['json', jsonNestedDiff],
+  ])('and for \'%s\' formatter', (formatType, expected) => {
+    expect(getFileDiff(fileAPath, fileBPath, formatType)).toBe(expected);
   });
 });
