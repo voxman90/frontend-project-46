@@ -23,6 +23,4 @@ const format = (value) => {
   }
 };
 
-const formatDiffTree = (root) => format(root);
-
-export default formatDiffTree;
+export default format;
