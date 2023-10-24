@@ -3,7 +3,11 @@ import { fileURLToPath } from 'url';
 import { expect, describe, test } from '@jest/globals';
 
 import getFileDiff from '../src/index.js';
-import { jsonNestedDiff, plainNestedDiff, stylishNestedDiff } from '../__fixtures__/samples.js';
+import {
+  jsonNestedDiff,
+  plainNestedDiff,
+  stylishNestedDiff,
+} from '../__fixtures__/samples.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fileDir = resolve(__dirname, '../__fixtures__/');

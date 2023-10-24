@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-
 const format = (value) => {
   switch (true) {
     case (value === null): {

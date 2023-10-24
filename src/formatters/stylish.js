@@ -4,8 +4,6 @@ import _ from 'lodash';
 
 import { nodeWeight, makeLeaf } from '../diff-tree.js';
 
-const thisIsNodeList = true;
-
 const halfIndent = ' '.repeat(2);
 const indent = halfIndent.repeat(2);
 
@@ -25,11 +23,11 @@ const formatNodeValue = (depth, node) => {
   const isDiffTree = weight === nodeWeight.inode;
 
   if (isDiffTree) {
-    return formatObject(depth + 1, value, thisIsNodeList);
+    return bracket(depth + 1, formatNodeList(depth + 1, value));
   }
 
   if (_.isPlainObject(value)) {
-    return formatObject(depth + 1, value);
+    return bracket(depth + 1, formatObject(depth + 1, value));
   }
 
   return value;
@@ -57,19 +55,16 @@ const splitUpdatedNodes = (nodes) => nodes.flatMap((node) => {
   return node;
 });
 
-const formatObject = (depth, obj, isThisNodes = false) => {
-  const formattedProperties = (isThisNodes)
-    ? splitUpdatedNodes(obj)
-      .map((node) => formatNode(depth, node))
-      .join('\n')
-    : _.sortBy(Object.keys(obj))
-      .map((key) => formatNode(depth, makeLeaf(null, key, obj[key])))
-      .join('\n');
-  const parenthesisIndent = indent.repeat(depth);
+const bracket = (depth, content) => `{\n${content}\n${indent.repeat(depth)}}`;
 
-  return `{\n${formattedProperties}\n${parenthesisIndent}}`;
-};
+const formatNodeList = (depth, nodeList) => splitUpdatedNodes(nodeList)
+  .map((node) => formatNode(depth, node))
+  .join('\n');
 
-const formatDiffTree = (root) => formatObject(0, root.value, thisIsNodeList);
+const formatObject = (depth, obj) => _.sortBy(Object.keys(obj))
+  .map((key) => formatNode(depth, makeLeaf(null, key, obj[key])))
+  .join('\n');
+
+const formatDiffTree = (root) => formatNodeValue(-1, root);
 
 export default formatDiffTree;
