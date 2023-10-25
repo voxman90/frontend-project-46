@@ -1,17 +1,13 @@
+import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { expect, describe, test } from '@jest/globals';
 
 import getFileDiff from '../src/index.js';
-import {
-  jsonNestedDiff,
-  plainNestedDiff,
-  stylishNestedDiff,
-} from '../__fixtures__/samples.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const fixtureDir = join(__dirname, '..', '__fixtures__');
-const getFixturePath = (fileName, fileExt) => join(fixtureDir, `${fileName}.${fileExt}`);
+const fixturesDir = join(__dirname, '..', '__fixtures__');
+const getFixturePath = (fileName, fileExt) => join(fixturesDir, `${fileName}.${fileExt}`);
 
 describe.each([
   ['json'],
@@ -22,10 +18,13 @@ describe.each([
   const fileBPath = getFixturePath('nestedB', fileExt);
 
   test.each([
-    ['stylish', stylishNestedDiff],
-    ['plain', plainNestedDiff],
-    ['json', jsonNestedDiff],
-  ])('and for \'%s\' formatter', (formatType, expected) => {
+    ['stylish'],
+    ['plain'],
+    ['json'],
+  ])('and for \'%s\' formatter', (formatType) => {
+    const resultPath = getFixturePath(`${formatType}NestedDiff`, 'txt');
+    const expected = readFileSync(resultPath, 'utf8');
+
     expect(getFileDiff(fileAPath, fileBPath, formatType)).toBe(expected);
   });
 });
